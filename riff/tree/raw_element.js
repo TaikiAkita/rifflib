@@ -124,6 +124,8 @@ function RIFFRawElementDeserializer(acptName) {
      *    - One of following error occurred:
      *      - Invalid beginning offset.
      *      - Invalid ending offset.
+     *  @throws {RIFFOperationCancelledError}
+     *    - The cancellator was activated.
      *  @param {IRIFFReadAccessor} accessor
      *    - The deserialization data accessor.
      *  @param {Number} start
