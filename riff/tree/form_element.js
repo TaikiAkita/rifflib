@@ -11,8 +11,8 @@
 //  Imported modules.
 const RiTreeElement = 
     require("./element");
-const RiTreeRawElement = 
-    require("./raw_element");
+const RiTreeStream = 
+    require("./stream");
 const RiIoAccessor = 
     require("./../io/accessor");
 const RiIoMemAccessor = 
@@ -39,8 +39,6 @@ const RIFFMemoryReadAccessor =
     RiIoMemAccessor.RIFFMemoryReadAccessor;
 const RIFFMultiSegmentReadAccessorFactory = 
     RiIoMsegAccessor.RIFFMultiSegmentReadAccessorFactory;
-const RIFFRawElementDeserializer = 
-    RiTreeRawElement.RIFFRawElementDeserializer;
 const RIFFElementDeserializerOutput = 
     RiTreeElement.RIFFElementDeserializerOutput;
 const RIFFElementDeserializerOption = 
@@ -53,6 +51,8 @@ const RIFFElementSerializerOption =
     RiTreeElement.RIFFElementSerializerOption;
 const IRIFFElement = 
     RiTreeElement.IRIFFElement;
+const RIFFElementDeserializationStream = 
+    RiTreeStream.RIFFElementDeserializationStream;
 const RIFFChunk = 
     RiMdChunk.RIFFChunk;
 const RIFFChunkDeserializer = 
@@ -114,11 +114,11 @@ function RIFFFormElementDeserializer(acptFormType) {
     //
 
     /**
-     *  Child deserializers.
+     *  Deserializers.
      * 
-     *  @type {Map<Number, Set<IRIFFElementDeserializer>>}
+     *  @type {Set<IRIFFElementDeserializer>}
      */
-    let cdesmap = new Map();
+    let dsrls = new Set();
 
     //
     //  Public methods.
@@ -143,7 +143,7 @@ function RIFFFormElementDeserializer(acptFormType) {
     this.getAcceptableFormType = function() {
         return acptFormType;
     };
-    
+
     /**
      *  Use specified child deserializer.
      * 
@@ -153,20 +153,12 @@ function RIFFFormElementDeserializer(acptFormType) {
      *    - The child deserializer.
      */
     this.useChildDeserializer = function(dsrl) {
-        let dsrlkey = dsrl.getAcceptableName().getBytes().readUInt32BE(0);
-        let dsrlobjs = null;
-        if (cdesmap.has(dsrlkey)) {
-            dsrlobjs = cdesmap.get(dsrlkey);
-            if (dsrlobjs.has(dsrl)) {
-                throw new RIFFDeserializerExistedError(
-                    "Deserializer existed."
-                );
-            }
-        } else {
-            dsrlobjs = new Set();
-            cdesmap.set(dsrlkey, dsrlobjs);
+        if (dsrls.has(dsrl)) {
+            throw new RIFFDeserializerExistedError(
+                "Deserializer existed."
+            );
         }
-        dsrlobjs.add(dsrl);
+        dsrls.add(dsrl);
     };
 
     /**
@@ -178,20 +170,10 @@ function RIFFFormElementDeserializer(acptFormType) {
      *    - The child deserializer.
      */
     this.unuseChildDeserializer = function(dsrl) {
-        let dsrlkey = dsrl.getAcceptableName().getBytes().readUInt32BE(0);
-        if (!cdesmap.has(dsrlkey)) {
+        if (!dsrls.delete(dsrl)) {
             throw new RIFFDeserializerNotExistsError(
                 "Deserializer doesn't exist."
             );
-        }
-        let dsrlobjs = cdesmap.get(dsrlkey);
-        if (!dsrlobjs.delete(dsrl)) {
-            throw new RIFFDeserializerNotExistsError(
-                "Deserializer doesn't exist."
-            );
-        }
-        if (dsrlobjs.size == 0) {
-            cdesmap.delete(dsrlkey);
         }
     };
 
@@ -265,60 +247,17 @@ function RIFFFormElementDeserializer(acptFormType) {
         let form = new RIFFFormElement(formType);
 
         //  Parse form children.
-        let childOffset = 4;
-        while (childOffset < ckDataLength) {
-            //  Select child element deserializer.
-            if (childOffset + 8 > ckDataLength) {
-                throw new RIFFDeserializeError("Form body truncated.");
-            }
-            let childChunkIdRaw = await ckDataAccessor.read(
-                childOffset, 
-                4, 
-                cancellator
-            );
-            let childChunkIdFourCC = new RIFFFourCC(childChunkIdRaw);
-            let childDsrlKey = childChunkIdRaw.readUInt32BE(0);
-            let childDsrlObjs = [];
-            if (cdesmap.has(childDsrlKey)) {
-                cdesmap.get(childDsrlKey).forEach(function(childDsrl) {
-                    childDsrlObjs.push(childDsrl);
-                });
-            }
-            childDsrlObjs.push(
-                new RIFFRawElementDeserializer(childChunkIdFourCC)
-            );
-
-            //  Deserialize the form child.
-            let childDsrlSuccess = false;
-            let childDsrlLastError = null;
-            let childDsrlOut = null;
-            for (let i = 0; i < childDsrlObjs.length; ++i) {
-                let childDsrl = childDsrlObjs[i];
-                try {
-                    childDsrlOut = await childDsrl.deserialize(
-                        ckDataAccessor, 
-                        childOffset, 
-                        ckDataLength, 
-                        options, 
-                        cancellator
-                    );
-                    childDsrlSuccess = true;
-                    break;
-                } catch(error) {
-                    if (error instanceof RIFFDeserializeError) {
-                        childDsrlLastError = error;
-                    } else {
-                        throw error;
-                    }
-                }
-            }
-            if (!childDsrlSuccess) {
-                throw childDsrlLastError;
-            }
-            form.addChild(childDsrlOut.getElement());
-
-            //  Move to the next form child.
-            childOffset = childDsrlOut.getNextOffset();
+        let formChildrenStream = new RIFFElementDeserializationStream(
+            ckDataAccessor.sub(4),
+            ckDataLength - 4,
+            options
+        );
+        dsrls.forEach(function(dsrl) {
+            formChildrenStream.useDeserializer(dsrl);
+        });
+        while (formChildrenStream.hasNext()) {
+            let formChild = await formChildrenStream.next(cancellator);
+            form.addChild(formChild);
         }
 
         return new RIFFElementDeserializerOutput(

@@ -31,6 +31,8 @@ const RiTrRawElement =
     require("./../riff/tree/raw_element");
 const RiTrZStrElement = 
     require("./../riff/tree/zstr_element");
+const RiTrStream = 
+    require("./../riff/tree/stream");
 
 //  Imported classes.
 const IRIFFReadAccessor = 
@@ -77,6 +79,12 @@ const RIFFZStringElement =
     RiTrZStrElement.RIFFZStringElement;
 const RIFFZStringElementDeserializer = 
     RiTrZStrElement.RIFFZStringElementDeserializer;
+const RIFFElementDeserializationStream = 
+    RiTrStream.RIFFElementDeserializationStream;
+const RIFFElementSerializationStreamAccessor = 
+    RiTrStream.RIFFElementSerializationStreamAccessor;
+const RIFFElementSerializationStream = 
+    RiTrStream.RIFFElementSerializationStream;
 
 //  Imported constants.
 const BIG_ENDIAN = 
@@ -121,6 +129,14 @@ module.exports = {
             RIFFFourCC
     },
     "Tree": {
+        "Stream": {
+            "RIFFElementDeserializationStream": 
+                RIFFElementDeserializationStream,
+            "RIFFElementSerializationStreamAccessor": 
+                RIFFElementSerializationStreamAccessor,
+            "RIFFElementSerializationStream": 
+                RIFFElementSerializationStream
+        },
         "IRIFFElement": 
             IRIFFElement,
         "IRIFFElementDeserializer": 
