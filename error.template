@@ -1,0 +1,24 @@
+#
+#  Copyright 2019 - 2021 The RIFFLib Authors. All rights reserved.
+#  Use of this source code is governed by a BSD-style license that can be
+#  found in the LICENSE.md file.
+#
+
+#
+#  Note:
+#    [1] Once you modified this file, run following command to re-generate 
+#        error.js file:
+#
+#          $ ./scripts/generate-error.sh
+#
+
+Bug
+Parameter
+InvalidOperation
+OperationCancelled
+Serialize
+Deserialize
+DeserializerNotAccepted
+DeserializerExisted
+DeserializerNotExists
+IO

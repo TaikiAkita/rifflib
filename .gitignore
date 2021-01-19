@@ -1,0 +1,16 @@
+#
+#  Copyright 2019 - 2021 XiaoJSoft Studio. All rights reserved.
+#  Use of this source code is governed by a BSD-style license that can be
+#  found in the LICENSE.md file.
+#
+
+#  Internal files.
+/internal/
+*-selftest.*
+*.selftest.*
+
+#  Backup files.
+*.bak
+
+#  Dependency directories
+node_modules/

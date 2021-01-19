@@ -1,0 +1,15 @@
+{
+  "name": "rifflib",
+  "version": "1.0.1",
+  "description": "RIFF serializer/deserializer for Node.JS.",
+  "main": "library/api.js",
+  "author": "The RIFFLib Authors.",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "xrtlibrary-async": "^1.0.17",
+    "xrtlibrary-bughandler": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^10.0.0"
+  }
+}
