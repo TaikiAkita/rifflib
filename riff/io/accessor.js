@@ -29,7 +29,7 @@ const ConditionalSynchronizer =
 //
 
 /**
- *  Interface of all RIFF read accessors.
+ *  Interface of all RIFF read accessor classes.
  * 
  *  @constructor
  */
@@ -83,7 +83,7 @@ function IRIFFReadAccessor() {
 }
 
 /**
- *  Interface of all RIFF write accessors.
+ *  Interface of all RIFF write accessor classes.
  * 
  *  @constructor
  */
@@ -154,6 +154,8 @@ function IRIFFWriteAccessor() {
  *    - The destination accessor.
  *  @param {Number} [blksz]
  *    - The I/O block size.
+ *  @param {ConditionalSynchronizer} [cancellator]
+ *    - The cancellator.
  *  @returns {Promise<void>}
  *    - The promise object (resolves if succeed, rejects if error occurred).
  */

@@ -272,7 +272,7 @@ function RIFFElementSerializerOutput(
      *    - I/O error.
      *  @throws {RIFFParameterError}
      *    - Invalid offset.
-     *  @param {IRIFFWriteAccessor}
+     *  @param {IRIFFWriteAccessor} accessor
      *    - The write accessor.
      *  @param {Number} [offset]
      *    - The write offset.

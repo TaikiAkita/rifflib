@@ -33,6 +33,8 @@ const RiTrZStrElement =
     require("./../riff/tree/zstr_element");
 const RiTrStream = 
     require("./../riff/tree/stream");
+const RiError = 
+    require("./../error");
 
 //  Imported classes.
 const IRIFFReadAccessor = 
@@ -85,6 +87,26 @@ const RIFFElementSerializationStreamAccessor =
     RiTrStream.RIFFElementSerializationStreamAccessor;
 const RIFFElementSerializationStream = 
     RiTrStream.RIFFElementSerializationStream;
+const RIFFError = 
+    RiError.RIFFError;
+const RIFFBugError = 
+    RiError.RIFFBugError;
+const RIFFParameterError = 
+    RiError.RIFFParameterError;
+const RIFFInvalidOperationError = 
+    RiError.RIFFInvalidOperationError;
+const RIFFOperationCancelledError = 
+    RiError.RIFFOperationCancelledError;
+const RIFFSerializeError = 
+    RiError.RIFFSerializeError;
+const RIFFDeserializeError = 
+    RiError.RIFFDeserializeError;
+const RIFFDeserializerExistedError = 
+    RiError.RIFFDeserializerExistedError;
+const RIFFDeserializerNotExistsError = 
+    RiError.RIFFDeserializerNotExistsError;
+const RIFFIOError = 
+    RiError.RIFFIOError;
 
 //  Imported constants.
 const BIG_ENDIAN = 
@@ -165,5 +187,27 @@ module.exports = {
             RIFFZStringElement,
         "RIFFZStringElementDeserializer": 
             RIFFZStringElementDeserializer
+    },
+    "Errors": {
+        "RIFFError": 
+            RIFFError,
+        "RIFFBugError": 
+            RIFFBugError,
+        "RIFFParameterError": 
+            RIFFParameterError,
+        "RIFFInvalidOperationError": 
+            RIFFInvalidOperationError,
+        "RIFFOperationCancelledError": 
+            RIFFOperationCancelledError,
+        "RIFFSerializeError": 
+            RIFFSerializeError,
+        "RIFFDeserializeError": 
+            RIFFDeserializeError,
+        "RIFFDeserializerExistedError": 
+            RIFFDeserializerExistedError,
+        "RIFFDeserializerNotExistsError": 
+            RIFFDeserializerNotExistsError,
+        "RIFFIOError": 
+            RIFFIOError
     }
 };

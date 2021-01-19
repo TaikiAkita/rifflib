@@ -18,7 +18,6 @@ InvalidOperation
 OperationCancelled
 Serialize
 Deserialize
-DeserializerNotAccepted
 DeserializerExisted
 DeserializerNotExists
 IO

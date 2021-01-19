@@ -1,0 +1,165 @@
+This document is available in two forms: RTF and Text.
+
+The source (compressed) files are:
+Text:	RMTxt.zip(6 character) or RIFFMCIT.ZIP
+RTF:	RMRTF.zip(6 character) or RIFFMCIR.ZIP
+
+Documents are distributed to:
+uunet.uu.net: 	~ftp/vendor/microsoft/multimedia
+MM Sys BBS:	206 936-4082 9600,n,8,1
+Compu$erve:	Go Multimedia, forum 6
+
+
+The file formats and interfaces discussed here are supported in the
+Multimedia Extensions to Windows.  In addition, IBM has stated that
+they will support these formats and interfaces in OS/2
+
+----------------------------------------------------------------------------     
+     Multimedia Programming Interface
+     and Data Specifications 1.0
+     
+     Issued as a joint design by IBM Corporation and
+     Microsoft Corporation
+     
+     August 1991
+     
+     This document describes the programming interfaces and
+     data specifications for multimedia that are common to
+     both OS/2 and Windows environments. These
+     specifications may be enhanced to incorporate new
+     technologies or modified based on customer feedback
+     and, as such, specifications incorporated into any
+     final product may vary.
+     
+     Microsoft is a registered trademark, and Windows is a
+     trademark of Microsoft Corp.
+     
+     IBM and OS/2 are registered trademarks of International
+     Business Machines Corporation.
+
+
+Overview     
+     
+     This document describes the file format and control
+     interface specifications for multimedia. These
+     specifications allow developers to use common file
+     format and device control interfaces.
+
+
+Resource Interchange File Format
+
+     
+     The Resource Interchange File Format (RIFF), a tagged
+     file structure, is a general specification upon which
+     many file formats can be defined. The main advantage of
+     RIFF is its extensibility; file formats based on RIFF
+     can be future-proofed, as format changes can be ignored
+     by existing applications.
+     
+     The RIFF file format is suitable for the following
+     multimedia tasks:
+     
+     •     Playing back multimedia data
+     
+     •     Recording multimedia data
+     
+     •     Exchanging multimedia data between applications
+       and across platforms
+     
+     Chapter 2, “Resource Interchange File Format,”
+     describes the RIFF format.
+
+
+Multimedia File Formats
+
+     
+     A number of RIFF-based and non-RIFF file formats have
+     been defined for the storage of multimedia data.
+     Chapter 3, “Multimedia File Formats,” describes the
+     following file formats:
+     
+     •     Bundle File Format
+     
+     •     Device-Independent Bitmap (DIB) and RIFF DIB file
+       formats
+     
+     •     Musical Instrument Digital Interface (MIDI) and
+       RIFF MIDI file formats
+     
+     •     Palette File Format
+     
+     •     Rich Text File Format
+     
+     •     Waveform Audio File Format
+
+
+Media Control Interface
+
+     
+     The Media Control Interface (MCI) is a high-level
+     control mechanism that provides a device-independent
+     interface to multimedia devices and resource files.
+     
+     The Media Control Interface (MCI) provides a command
+     set for playing and recording multimedia devices and
+     resource files. Developers creating multimedia
+     applications are encouraged to use this high-level
+     command interface rather than the low-level functions
+     specific to each platform. The MCI command set acts as
+     a platform-independent layer that sits between
+     multimedia applications and the underlying system
+     software.
+     
+     The MCI command set is extensible in two ways:
+     
+     •     Developers can incorporate new multimedia devices
+       and file formats in the MCI command set by creating
+       new MCI drivers to interpret the commands.
+     
+     •     New commands and command options can be added to
+       support special features or functions required by
+       new multimedia devices or file formats.
+     
+     Using MCI, an application can control multimedia
+     devices using simple command strings like open, play,
+     and close. The MCI command strings provide a generic
+     interface to different multimedia devices, reducing the
+     number of commands a developer needs to learn. A
+     multimedia application might even accept MCI commands
+     from an end user and pass them unchanged to the MCI
+     driver, which parses the command and performs the
+     appropriate action.
+     
+     Chapter 3, “Media Control Interface,” describes MCI and
+     its command set in detail.
+
+
+Registering Multimedia Formats
+
+     
+     This document discusses several multimedia codes and
+     formats that require registration. These multimedia
+     elements include the following:
+     
+     •     Compression techniques
+     
+     •     RIFF form types, chunk IDs, and list types
+     
+     •     Compound-file usage codes
+     
+     •     Waveform audio format codes
+     
+     To register these multimedia elements, request a
+     Multimedia Developer Registration Kit from the
+     following group:RIFF forms;registering
+     
+     Microsoft Corporation
+       
+       Multimedia Systems Group
+       Product Marketing
+       One Microsoft Way
+       Redmond, WA 98052-6399
+     
+     The Multimedia Developer Registration Kit also lists
+     currently defined multimedia elements.
+

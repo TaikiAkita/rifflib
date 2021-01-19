@@ -110,19 +110,6 @@ function RIFFDeserializeError(message = "") {
 }
 
 /**
- *  RIFF deserializer not accepted error.
- * 
- *  @constructor
- *  @extends {RIFFError}
- *  @param {String} [message]
- *      - The message.
- */
-function RIFFDeserializerNotAcceptedError(message = "") {
-    //  Let parent class initialize.
-    RIFFError.call(this, message);
-}
-
-/**
  *  RIFF deserializer existed error.
  * 
  *  @constructor
@@ -171,7 +158,6 @@ Util.inherits(RIFFInvalidOperationError, RIFFError);
 Util.inherits(RIFFOperationCancelledError, RIFFError);
 Util.inherits(RIFFSerializeError, RIFFError);
 Util.inherits(RIFFDeserializeError, RIFFError);
-Util.inherits(RIFFDeserializerNotAcceptedError, RIFFError);
 Util.inherits(RIFFDeserializerExistedError, RIFFError);
 Util.inherits(RIFFDeserializerNotExistsError, RIFFError);
 Util.inherits(RIFFIOError, RIFFError);
@@ -185,7 +171,6 @@ module.exports = {
     "RIFFOperationCancelledError": RIFFOperationCancelledError,
     "RIFFSerializeError": RIFFSerializeError,
     "RIFFDeserializeError": RIFFDeserializeError,
-    "RIFFDeserializerNotAcceptedError": RIFFDeserializerNotAcceptedError,
     "RIFFDeserializerExistedError": RIFFDeserializerExistedError,
     "RIFFDeserializerNotExistsError": RIFFDeserializerNotExistsError,
     "RIFFIOError": RIFFIOError
