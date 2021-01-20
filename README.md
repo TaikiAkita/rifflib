@@ -16,13 +16,13 @@ And then you can import this package in your application:
 const RIFFLib = require("rifflib");
 ```
 
-See the [Getting Started Guide](https://git-private.xiaojsoft.org/fmtlibs/rifflib/blob/master/docs/get-started.md) for further information. Or simply see our [example](https://git-private.xiaojsoft.org/fmtlibs/rifflib/tree/master/examples) code.
+See the [Getting Started Guide](docs/get-started.md) for further information. Or simply see our [example](examples/) code.
 
 ### Reference
 
-To see all available APIs, you can read our [API Reference](https://git-private.xiaojsoft.org/fmtlibs/rifflib/blob/master/docs/api-reference.md).
+To see all available APIs, you can read our [API Reference](docs/api-reference.md).
 
-To learn the RIFF specification, you can read the [Multimedia Programming Interface and Data Specification 1.0](https://git-private.xiaojsoft.org/fmtlibs/rifflib/tree/master/docs/specs) from Microsoft.
+To learn the RIFF specification, you can read the [Multimedia Programming Interface and Data Specification 1.0](docs/specs/) from Microsoft.
 
 ### Authors
 
